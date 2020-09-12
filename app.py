@@ -1,12 +1,22 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import pdb
 import json
 import os
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 
 def index():
+    
+
+    name = None
+ 
+
+    if request.method == 'POST':
+        
+        name = request.form['ingredient']
+    else:
+        name = '' 
 
     def fetch_json(file_name):
         root = os.path.realpath(os.path.dirname(__file__))
@@ -19,17 +29,38 @@ def index():
        
         return fetched_ingredients
 
-    def fetch_products():
+    def fetch_products(resources, ingredients, name):
         fetched_products = fetch_json('products.json')
-        return fetched_products
-
-    resources = {}
-    products = fetch_products()
-    ingredients = fetch_ingredients()
+        resources["products"] = []
+        already_added = {}
+        for product in fetched_products:
+            for ingredientID in product["ingredientIds"]:
+                
+                ingredient = ingredients[ingredientID-1]["name"]
+                length = len(name)
+                
+                if name == ingredient[0:length] and product["id"] not in already_added:
+                    already_added[product["id"]] = True
+                    resources["products"].append(product)
+                    
     
-    resources['products'] = products
+
+      
+        return resources
+  
+    resources = {}
+    resources['reversed_resources'] = {}
+    ingredients = fetch_ingredients()
     resources['ingredients'] = ingredients
-    # pdb.set_trace()
+   
+    resources = fetch_products(resources, ingredients, name)
+    
+    
+
+    
+    
+  
+    
     return render_template('index.html', resources=resources)
 
 

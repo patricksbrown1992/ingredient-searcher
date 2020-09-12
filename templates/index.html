@@ -6,12 +6,22 @@
 
 {% block body %}
 <h1>Ingredient Search</h1>
+<form action="" method="POST">
+    <label for="ingredient">Enter an Ingredient</label>
+    <input name = "ingredient" type="text" id='search-input' placeholder="search ingredient name" value="">
+    <input type="submit" value="search input">
+</form>
+
+
+
+
+
 {% for product in resources["products"] %}
     <h3>{{product['name']}}</h3>
     {% for ingredientId in product["ingredientIds"] %}
         <li>{{resources["ingredients"][ingredientId-1]["name"]}}</li>
     {% endfor %}
-
+<img src={{product.image.url}} alt="image of product">
 {% endfor %}
 
 {% endblock %}
