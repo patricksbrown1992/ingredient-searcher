@@ -6,4 +6,12 @@
 
 {% block body %}
 <h1>Ingredient Search</h1>
+{% for product in resources["products"] %}
+    <h3>{{product['name']}}</h3>
+    {% for ingredientId in product["ingredientIds"] %}
+        <li>{{resources["ingredients"][ingredientId-1]["name"]}}</li>
+    {% endfor %}
+
+{% endfor %}
+
 {% endblock %}
