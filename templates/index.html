@@ -8,7 +8,9 @@
 <h1>Ingredient Search</h1>
 <form action="" method="POST">
     <div class='search-div'>
-        <label for="ingredient">Enter an Ingredient</label>
+        <!-- <label for="ingredient">Enter an Ingredient</label> -->
+        <label for='ingredient'>Must specify organic if you want those results</label>
+        <br>
         <input class='search-input' name = "ingredient" type="text" id='search-input' placeholder="search ingredient name" value="">
     </div>
     <!-- prompts user to see all recipes again if no recipe returns -->
@@ -27,8 +29,12 @@
 
 
 {% if resources["products"]|length == 0  %}
-    <h2 class='empty-search'>There are no recipes with {{resources["search"]}}. Please hit reset button to see all options again</h2>
+    <h2 class='empty-search'>There are no recipes with {{resources["search"]}}. Please hit reset button to see all products again</h2>
 {% else %}
+    {% if resources["search"]|length > 0  %}
+        <br>
+       <u><h2 style="margin-left: 15px;">Search results for {{resources["search"]}}</h2></u> 
+    {% endif %}
     {% for product in resources["products"]%}
         <div class="product-div">
             <div class="left-side">
