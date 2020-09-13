@@ -9,16 +9,17 @@
 {% block body %}
 <div class='page-header'>
     <h1>Ingredient Search</h1>
-    <img src="static/favicon.ico" alt="">
+    <img src="static/favicon.ico" alt="Daily Harvest logo">
 </div>
 
 <form action="" method="POST">
     <div class='search-div'>
-        <!-- <label for="ingredient">Enter an Ingredient</label> -->
+      
         <label for='ingredient'>Must specify organic X if you want those results</label>
         <br>
         <input class='search-input' name = "ingredient" type="text" id='search-input' placeholder="search ingredient name" value="">
     </div>
+    
     <!-- prompts user to see all recipes again if no recipe returns -->
     {% if resources["products"]|length == 0  %}
         <input class='button-div' type="submit" value="RESET">
