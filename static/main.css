@@ -8,6 +8,15 @@
     border: 1px solid black;
 }
    
+
+h1 {
+    font-weight: 600;
+    font-size: 36px;
+    margin-left: 15px;
+    margin-top: 50px;
+}
+
+
 form {
     display: flex;
     flex-direction: row;
@@ -15,9 +24,27 @@ form {
     height: 100px;
 }
 
+.button-div {
+    height: 40px;
+    width: 80px;
+    border-radius: 4px;
+    border: none;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+    margin-left: 25px;
+    margin-top: 27px;
+}
+
 .search-div {
     display: flex;
     flex-direction: column;
+    margin-left: 15px
+}
+
+.search-div label {
+    margin-bottom: 5px;
+    font-size: 24px;
 }
 
 .product-div h3 {
@@ -36,6 +63,11 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.search-input {
+    height: 30px;
+    width: 250px;
 }
 
 .left-side {
