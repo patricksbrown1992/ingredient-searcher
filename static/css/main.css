@@ -2,13 +2,24 @@
     display: flex;
     flex-direction: row;
     width: 600px;
-    height: 350px;
+    height: 325px;
     margin-top: 35px;
     margin-left: 15px;
     border: 1px solid black;
 }
    
+.page-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 80px;
+}
 
+   
+.page-header img {
+    height: 100%;
+    margin-left: 10px;
+}
 .errors{    
     margin-left: 15px;
     margin-top: 10px;
@@ -22,7 +33,7 @@ h1 {
     font-weight: 600;
     font-size: 36px;
     margin-left: 15px;
-    margin-top: 50px;
+    /* margin-top: 50px; */
 }
 
 .empty-search {

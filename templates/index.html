@@ -5,11 +5,15 @@
 {% endblock %}
 
 {% block body %}
-<h1>Ingredient Search</h1>
+<div class='page-header'>
+    <h1>Ingredient Search</h1>
+    <img src="static/logo.png" alt="">
+</div>
+
 <form action="" method="POST">
     <div class='search-div'>
         <!-- <label for="ingredient">Enter an Ingredient</label> -->
-        <label for='ingredient'>Must specify organic if you want those results</label>
+        <label for='ingredient'>Must specify organic X if you want those results</label>
         <br>
         <input class='search-input' name = "ingredient" type="text" id='search-input' placeholder="search ingredient name" value="">
     </div>
