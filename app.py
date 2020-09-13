@@ -1,53 +1,45 @@
 from flask import Flask, render_template, request
+
 import pdb
 import json
-import os
+
+import requests
+import string
+
 app = Flask(__name__)
 
 @app.route('/', methods=['POST', 'GET'])
 
 def index():
     
-    errors = None
-    search = None
- 
+    errors = search = None
+   
+    
     # if the submit button is clicked
     if request.method == 'POST':
-        errors_found = []
+
         
-        acceptable_chars = {'-': True, '+': True, "'": True, ' ': True, 'a': True, 'A': True, 'b': True, 'B': True, 'C': True, 'c': True, 'D': True, 'd': True, 'E': True, 'e': True, 'F': True, 'f': True, 'G': True, 'g': True, 'H': True, 'h': True, 'I': True, 'i': True, 'J': True, 'j': True, 'K': True, 'k': True, "L": True, 'l': True, 'M': True, 'm': True, 'N': True, 'n': True, "O": True, 'o': True, "P": True, 'p': True, "Q": True, 'q': True, "R": True, "r": True, "S": True, 's': True, "T": True, 't': True, "U": True, 'u': True, "V": True, "v": True, "W": True, 'w': True, "X": True, "x": True, "Y": True, "y": True, "Z": True, "z": True}
+        acceptable_chars = set(string.ascii_letters + "+-' ")
         # user input as a string
         searched_string = request.form['ingredient']
         # iterate over string to check that every character is acceptable
-        for char in searched_string:
-            if char not in acceptable_chars:
-                errors_found.append(char)
-        
-        if len(errors_found) > 0:
-            search = ''
-            errors = errors_found
-        else:
-            errors = ''
-            search = searched_string
+        errors_found = [char for char in searched_string if not (char in acceptable_chars)]
+       
+        errors = errors_found if len(errors_found) > 0 else ""
+        search = "" if len(errors_found) > 0 else searched_string
+   
     else:
         errors = ''
-        search = '' 
-
-    def fetch_json(file_name):
-        root = os.path.realpath(os.path.dirname(__file__))
-        url = os.path.join(root, 'static', file_name)
-        parsed_json = json.load(open(url))
-        return parsed_json
+        search = ''
 
     def fetch_ingredients():
-        fetched_ingredients = fetch_json('ingredients.json')
        
+        fetched_ingredients = json.loads(requests.get("https://raw.githubusercontent.com/daily-harvest/opportunities/master/web-1/data/ingredients.json").text)
         return fetched_ingredients
 
     def fetch_and_search_products(resources, ingredients, search, errors):
-        # grab products
-        fetched_products = fetch_json('products.json')
-        
+
+        fetched_products = json.loads(requests.get("https://raw.githubusercontent.com/daily-harvest/opportunities/master/web-1/data/products.json").text)
         resources["products"] = []
         # use constant time to check if product has already been added
         already_added = {}
