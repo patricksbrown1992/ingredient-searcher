@@ -40,7 +40,7 @@ def index():
        
         return fetched_ingredients
 
-    def fetch_and_search_products(resources, ingredients, search):
+    def fetch_and_search_products(resources, ingredients, search, errors):
         # grab products
         fetched_products = fetch_json('products.json')
         
@@ -49,8 +49,8 @@ def index():
         already_added = {}
         # compare ingredient name against search
         length = len(search)
-        # save pointless iteration if there is no ingredient to search for yet
-        if search == '':
+        # save pointless iteration if there is no ingredient to search for yet or there was an error
+        if search == '' or len(errors) > 0:
             resources["products"] = fetched_products
         else:
             for product in fetched_products:
@@ -73,7 +73,7 @@ def index():
     ingredients = fetch_ingredients()
     
     
-    resources = fetch_and_search_products({}, ingredients, search)
+    resources = fetch_and_search_products({}, ingredients, search, errors)
     resources["ingredients"] = ingredients
     resources["errors"] = errors
 
