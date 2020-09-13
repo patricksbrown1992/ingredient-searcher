@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 
 {% block head%}
-    <title>Ingredient Search</title>
+    <title>Ingredient Searcher</title>
     <link rel="icon" type="image/png" href="static/favicon.ico" sizes="16x16">
     
 {% endblock %}
 
 {% block body %}
-<div class='page-header'>
-    <h1>Ingredient Search</h1>
-    <img src="static/favicon.ico" alt="Daily Harvest logo">
+<!-- safari was having issues, so I put it inline -->
+<div style="height: 80px;display: flex;flex-direction: row;align-items: center;" class='page-header'>
+    <h1>Ingredient Searcher</h1>
+    <img style="height: 100%;" src="static/favicon.ico" alt="Daily Harvest logo">
 </div>
 
 <form action="" method="POST">
