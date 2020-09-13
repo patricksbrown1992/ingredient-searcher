@@ -9,6 +9,13 @@
 }
    
 
+.errors{    
+    margin-left: 15px;
+    font-size: 24px;
+    color: red;
+    font-weight: 600;
+}
+
 h1 {
     font-weight: 600;
     font-size: 36px;

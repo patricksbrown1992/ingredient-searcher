@@ -8,13 +8,25 @@ app = Flask(__name__)
 
 def index():
     
-
+    errors = None
     search = None
  
     if request.method == 'POST':
+        errors_found = []
+        acceptable_chars = {'-': True, '+': True, "'": True, ' ': True, 'a': True, 'A': True, 'b': True, 'B': True, 'C': True, 'c': True, 'D': True, 'd': True, 'E': True, 'e': True, 'F': True, 'f': True, 'G': True, 'g': True, 'H': True, 'h': True, 'I': True, 'i': True, 'J': True, 'j': True, 'K': True, 'k': True, "L": True, 'l': True, 'M': True, 'm': True, 'N': True, 'n': True, "O": True, 'o': True, "P": True, 'p': True, "Q": True, 'q': True, "R": True, "r": True, "S": True, 's': True, "T": True, 't': True, "U": True, 'u': True, "V": True, "v": True, "W": True, 'w': True, "X": True, "x": True, "Y": True, "y": True, "Z": True, "z": True}
+        searched_string = request.form['ingredient']
+        for char in searched_string:
+            if char not in acceptable_chars:
+                errors_found.append(char)
         
-        search = request.form['ingredient']
+        if len(errors_found) > 0:
+            search = ''
+            errors = errors_found
+        else:
+            errors = ''
+            search = searched_string
     else:
+        errors = ''
         search = '' 
 
     def fetch_json(file_name):
@@ -53,7 +65,7 @@ def index():
                     
     
 
-      
+        
         return resources
   
 
@@ -63,7 +75,7 @@ def index():
     
     resources = fetch_and_search_products({}, ingredients, search)
     resources["ingredients"] = ingredients
-    
+    resources["errors"] = errors
 
     
     
