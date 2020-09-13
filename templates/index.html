@@ -21,20 +21,25 @@
 
 
 
+{% if resources["products"]|length == 0  %}
+    <h1>There are no recipes with {{resources["search"]}}. Please try again</h1>
+{% else %}
+    {% for product in resources["products"]%}
+        <div class="product-div">
+            <div class="left-side">
+                <h3>{{product['name']}}</h3>
+                <ul>
+                    {% for ingredientId in product["ingredientIds"] %}
+                        <li>{{resources["ingredients"][ingredientId-1]["name"]}}</li>
+                    {% endfor %}
+                </ul>
+                
+            </div>
+            <img src={{product.image.url}} alt="image of product">
+        </div>
+    {% endfor %}
+{% endif %}
 
-{% for product in resources["products"] %}
-<div class="product-div">
-    <div class="left-side">
-        <h3>{{product['name']}}</h3>
-        <ul>
-            {% for ingredientId in product["ingredientIds"] %}
-                <li>{{resources["ingredients"][ingredientId-1]["name"]}}</li>
-            {% endfor %}
-        </ul>
-        
-    </div>
-    <img src={{product.image.url}} alt="image of product">
-</div>
-{% endfor %}
+
 
 {% endblock %}

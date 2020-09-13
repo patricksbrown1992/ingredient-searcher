@@ -11,10 +11,14 @@ def index():
     errors = None
     search = None
  
+    # if the submit button is clicked
     if request.method == 'POST':
         errors_found = []
+        
         acceptable_chars = {'-': True, '+': True, "'": True, ' ': True, 'a': True, 'A': True, 'b': True, 'B': True, 'C': True, 'c': True, 'D': True, 'd': True, 'E': True, 'e': True, 'F': True, 'f': True, 'G': True, 'g': True, 'H': True, 'h': True, 'I': True, 'i': True, 'J': True, 'j': True, 'K': True, 'k': True, "L": True, 'l': True, 'M': True, 'm': True, 'N': True, 'n': True, "O": True, 'o': True, "P": True, 'p': True, "Q": True, 'q': True, "R": True, "r": True, "S": True, 's': True, "T": True, 't': True, "U": True, 'u': True, "V": True, "v": True, "W": True, 'w': True, "X": True, "x": True, "Y": True, "y": True, "Z": True, "z": True}
+        # user input as a string
         searched_string = request.form['ingredient']
+        # iterate over string to check that every character is acceptable
         for char in searched_string:
             if char not in acceptable_chars:
                 errors_found.append(char)
@@ -65,7 +69,8 @@ def index():
                     
     
 
-        
+        # if len(resources["products"]) == 0:
+        #     resources["products"] = [{"name": "There are no recipes with" + search + '. please try again', "ingredientId": "", "image": {"url": ''}}]
         return resources
   
 
@@ -76,6 +81,7 @@ def index():
     resources = fetch_and_search_products({}, ingredients, search, errors)
     resources["ingredients"] = ingredients
     resources["errors"] = errors
+    resources["search"] = search
 
     
     
