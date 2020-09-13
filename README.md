@@ -14,19 +14,25 @@ either use the live app or download the app. Unzip it. works with either python 
 
 ## Features
 
-DH logo in tab. 
+### DH logo in tab. 
 
 ![tab](/static/tab.png)
 
-Helpful errors on unapproved characters
+-------- 
+
+### Helpful errors on unapproved characters
 
 ![error](/static/error.png)
 
-Clean UI and easy UX
+------
+
+### Clean UI and easy UX
 
 ![searched](/static/searched.png)
 
-reset button when no products match search
+----- 
+
+### reset button when no products match search
 
 ![no-results](/static/no-results.png)
 
