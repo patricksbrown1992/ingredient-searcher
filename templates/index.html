@@ -11,8 +11,13 @@
         <label for="ingredient">Enter an Ingredient</label>
         <input class='search-input' name = "ingredient" type="text" id='search-input' placeholder="search ingredient name" value="">
     </div>
-    
-    <input class='button-div' type="submit" value="submit">
+    <!-- prompts user to see all recipes again if no recipe returns -->
+    {% if resources["products"]|length == 0  %}
+        <input class='button-div' type="submit" value="RESET">
+    {% else %}
+        <input class='button-div' type="submit" value="submit">
+    {% endif %}
+   
 </form>
 {% for error in resources["errors"] %}
     <h2 class='errors'>{{error}} is not allowed</h2>
@@ -22,7 +27,7 @@
 
 
 {% if resources["products"]|length == 0  %}
-    <h1>There are no recipes with {{resources["search"]}}. Please try again</h1>
+    <h2 class='empty-search'>There are no recipes with {{resources["search"]}}. Please hit reset button to see all options again</h2>
 {% else %}
     {% for product in resources["products"]%}
         <div class="product-div">

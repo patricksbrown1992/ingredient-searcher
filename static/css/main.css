@@ -23,6 +23,12 @@ h1 {
     margin-top: 50px;
 }
 
+.empty-search {
+    display: inline-block; 
+    color: red; 
+    font-size: 36px; 
+    margin-left: 15px;
+}
 
 form {
     display: flex;
@@ -75,6 +81,7 @@ form {
 .search-input {
     height: 30px;
     width: 250px;
+    padding-left: 15px;
 }
 
 .left-side {

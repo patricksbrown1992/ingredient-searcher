@@ -68,9 +68,6 @@ def index():
                         resources["products"].append(product)
                     
     
-
-        # if len(resources["products"]) == 0:
-        #     resources["products"] = [{"name": "There are no recipes with" + search + '. please try again', "ingredientId": "", "image": {"url": ''}}]
         return resources
   
 
