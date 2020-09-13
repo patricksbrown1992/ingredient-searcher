@@ -9,14 +9,13 @@ app = Flask(__name__)
 def index():
     
 
-    name = None
+    search = None
  
-
     if request.method == 'POST':
         
-        name = request.form['ingredient']
+        search = request.form['ingredient']
     else:
-        name = '' 
+        search = '' 
 
     def fetch_json(file_name):
         root = os.path.realpath(os.path.dirname(__file__))
@@ -29,32 +28,41 @@ def index():
        
         return fetched_ingredients
 
-    def fetch_products(resources, ingredients, name):
+    def fetch_and_search_products(resources, ingredients, search):
+        # grab products
         fetched_products = fetch_json('products.json')
+        
         resources["products"] = []
+        # use constant time to check if product has already been added
         already_added = {}
-        for product in fetched_products:
-            for ingredientID in product["ingredientIds"]:
-                
-                ingredient = ingredients[ingredientID-1]["name"]
-                length = len(name)
-                
-                if name == ingredient[0:length] and product["id"] not in already_added:
-                    already_added[product["id"]] = True
-                    resources["products"].append(product)
+        # compare ingredient name against search
+        length = len(search)
+        # save pointless iteration if there is no ingredient to search for yet
+        if search == '':
+            resources["products"] = fetched_products
+        else:
+            for product in fetched_products:
+                for ingredientID in product["ingredientIds"]:
+                    
+                    ingredient = ingredients[ingredientID-1]["name"]
+                    
+                    # if the product has not already been added and the search partial matches the beginning of the ingredient name regardless of upper or lower case
+                    if search.lower() == ingredient[0:length].lower() and product["id"] not in already_added:
+                        already_added[product["id"]] = True
+                        resources["products"].append(product)
                     
     
 
       
         return resources
   
-    resources = {}
-    resources['reversed_resources'] = {}
-    ingredients = fetch_ingredients()
-    resources['ingredients'] = ingredients
-   
-    resources = fetch_products(resources, ingredients, name)
+
     
+    ingredients = fetch_ingredients()
+    
+    
+    resources = fetch_and_search_products({}, ingredients, search)
+    resources["ingredients"] = ingredients
     
 
     
