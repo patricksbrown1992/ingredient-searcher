@@ -10,7 +10,7 @@
 
 ## How to run
 
-either use the live app or download the app. Unzip it. works with either python or python3. You will need flask if you want to run it locally. pip install flask for python or pip3 install flask for python3. pip install requests. make sure you're in the root directory and run python app.py or python3 app.py
+either use the live app or download the app. Unzip it. works with either python or python3. You will need flask if you want to run it locally. pip install flask for python or pip3 install flask for python3. pip install requests or pip3 install requests. make sure you're in the root directory and run python app.py or python3 app.py
 
 ## Features
 
